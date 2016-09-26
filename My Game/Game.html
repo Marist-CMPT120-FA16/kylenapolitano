@@ -3,21 +3,111 @@
 	<head>
 	<meta charset="ISO-8859-1">
 	<title>TITLE TBA</title>
+	<script type="text/javascript">
+	var currentLoc = 0;
+	var score = 0;
+	var navigationErrorCount = 0;
+    var sarcasmThreshold = 5;
+	var hasVisitedLoc0 = false;
+    var hasVisitedLoc1 = false;
+    var hasVisitedLoc2 = false;
+    var hasVisitedLoc3 = false;
+    var hasVisitedLoc4 = false;
+    function btnNorth_click() {
+        if (currentLoc === 0) {
+           currentLoc = 1;
+           look();               
+        } else {
+          if (currentLoc === 3) {
+             currentLoc = 0;
+             look();            
+          } else {
+             navigationError(); 
+          }
+        }            
+     }
+
+     function btnSouth_click() {
+        if (currentLoc === 1) {
+           currentLoc = 0;
+           look();
+        } else {
+          if (currentLoc === 0) {
+             currentLoc = 3;
+             look();
+          } else {
+             navigationError(); 
+          }
+        }
+     }
+
+     function btnEast_click() {
+        if (currentLoc === 4) {
+           currentLoc = 0;
+           look();
+        } else {
+          if (currentLoc === 0) {
+             currentLoc = 2;
+             look();
+          } else {
+             navigationError(); 
+          }
+        }
+     }
+
+     function btnWest_click() {
+        if (currentLoc === 2) {
+           currentLoc = 0;
+           look();
+        } else {
+          if (currentLoc === 0) {
+             currentLoc = 4;
+             look();
+          } else {
+             navigationError(); 
+          }
+        }
+     }
+     function checkScore() {
+         if (! hasVisitedLoc0) {            
+            if (currentLoc === 0) {
+               score = score + 5;
+               hasVisitedLoc0 = true;
+            }
+         } else if ( (! hasVisitedLoc1) && (currentLoc === 1) ) {            
+               score = score + 5;
+               hasVisitedLoc1 = true;
+         } else if ( (! hasVisitedLoc2) && (currentLoc === 2) ) {            
+               score = score + 5;
+               hasVisitedLoc2 = true;
+         } else if ( (! hasVisitedLoc3) && (currentLoc === 3) ) {            
+               score = score + 5;
+               hasVisitedLoc3 = true;
+         } else if ( (! hasVisitedLoc4) && (currentLoc === 4) ) {            
+               score = score + 5;
+               hasVisitedLoc4 = true;
+         }            
+      }
+	</script>
 	</head>
-	<body style="background-color:powderblue;">
+	<body style="background-color:powderblue;"onload="init();">
 		<h1 style="text-align:center;font-size:300%;color:white;">Welcome to Title!</h1>
 		<p style="text-align:center;color:white;">Any Problems? Contact me <a href = "mailto:kyle.napolitano3@marist.edu">here.</a></p>
 		<input type="button" 
-              value="North"
-              onclick="btnNorth_click();">
-       <input type="button" 
-              value="South"
-              onclick="btnSouth_click();">
-       <input type="button" 
-              value="East"
-              onclick="btnEast_click();">
-       <input type="button" 
-              value="West"
-              onclick="btnWest_click();">
+               value="North"
+               onclick="btnNorth_click();">
+        <input type="button" 
+               value="South"
+               onclick="btnSouth_click();">
+        <input type="button" 
+               value="East"
+               onclick="btnEast_click();">
+        <input type="button" 
+               value="West"
+               onclick="btnWest_click();">
+               
+        <br />
+              
+        <textarea id="taMain" rows="8" cols="32"></textarea>
 	</body>
 </html>
