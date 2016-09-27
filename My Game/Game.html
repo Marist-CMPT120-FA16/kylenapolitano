@@ -2,10 +2,10 @@
 <html lang="en">
 	<head>
 	<meta charset="ISO-8859-1">
-	<title>TITLE TBA</title>
+	<title>Desert Adventure</title>
 	<script type="text/javascript">
 	var currentLoc = 0;
-	var score = 0;
+	var score = 5;
 	var navigationErrorCount = 0;
     var sarcasmThreshold = 5;
 	var hasVisitedLoc0 = false;
@@ -13,6 +13,7 @@
     var hasVisitedLoc2 = false;
     var hasVisitedLoc3 = false;
     var hasVisitedLoc4 = false;
+    // Button Functions
     function btnNorth_click() {
         if (currentLoc === 0) {
            currentLoc = 1;
@@ -68,6 +69,36 @@
           }
         }
      }
+     // Story / Location Description
+     function look() {
+         var desc = "";
+         switch(currentLoc) {
+            case 0: desc = "Jeff tells you that he lost his way while exploring this cave a week ago and has been running out of supplies to survive.";
+                    break;
+            case 1: desc = "You have found a hidden cave!";
+                    break; 
+            case 2: desc = "While exploring this cave you think you hear something. Should you go further?";
+                    break;
+            case 3: desc = "Upon further exploration you have found another human named Jeff!";
+                    break;
+            case 4: desc = "Jeff is very grateful for finding him. As your reward he proceeds to tell you how to escape the desert!";
+                    break;
+            default: desc = "You cannot go that way";
+         }
+         checkScore();
+         desc = desc + "\n" + "Score: " + score ;
+         displayMessage(desc);
+      }
+     
+     function navigationError() {
+         navigationErrorCount = navigationErrorCount + 1;
+         if (navigationErrorCount < sarcasmThreshold) {
+            displayMessage("You cannot go that way.");
+         } else {
+            displayMessage("You have been attacked by a wild creature and died! Better luck next time!");
+         }            
+      }
+     // Score
      function checkScore() {
          if (! hasVisitedLoc0) {            
             if (currentLoc === 0) {
@@ -88,10 +119,14 @@
                hasVisitedLoc4 = true;
          }            
       }
+     function displayMessage(msg) {
+         var target = document.getElementById("taMain");
+         target.value = msg + "\n\n";
+      } 
 	</script>
 	</head>
-	<body style="background-color:powderblue;"onload="init();">
-		<h1 style="text-align:center;font-size:300%;color:white;">Welcome to Title!</h1>
+	<body style="background-color:#ffcc00;"onload="init();">
+		<h1 style="text-align:center;font-size:300%;color:white;">Welcome to Desert Adventure!</h1>
 		<p style="text-align:center;color:white;">Any Problems? Contact me <a href = "mailto:kyle.napolitano3@marist.edu">here.</a></p>
 		<input type="button" 
                value="North"
@@ -108,6 +143,10 @@
                
         <br />
               
-        <textarea id="taMain" rows="8" cols="32"></textarea>
+        <textarea rows="8"
+                cols="32"
+                id = "taMain"
+                name="taMain">You are located in a vast desert alone and you need to find your way out. You should probably start looking around.
+      </textarea>
 	</body>
 </html>
