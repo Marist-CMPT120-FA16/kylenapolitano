@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="UTF-8">
+	<title>Desert Adventure</title>
+	<script type="text/javascript">
+	var currentLoc = 0;
+	var score = 0;
+	var navigationErrorCount = 0;
+    var sarcasmThreshold = 5;
+	var hasVisitedLoc0 = false;
+    var hasVisitedLoc1 = false;
+    var hasVisitedLoc2 = false;
+    var hasVisitedLoc3 = false;
+    var hasVisitedLoc4 = false;
+  
+	// Init.    
+    function init() {
+        look();
+     }
+    
+    // Button Functions
+    function btnNorth_click() {
+        if (currentLoc === 0) {
+           currentLoc = 1;
+           look();               
+        }else{navigationError();
+        	  }            
+     }
+
+    
+    function btnSouth_click() {
+        if (currentLoc === 2) {
+           currentLoc = 3;
+           look();               
+        }else{navigationError();	 
+        	  }           
+     }
+    
+    function btnEast_click() {
+        if (currentLoc === 1) {
+           currentLoc = 2;
+           look();               
+        }else{navigationError();	
+        	  }           
+     }
+    
+    function btnWest_click() {
+        if (currentLoc === 3) {
+           currentLoc = 4;
+           look();               
+        }else{navigationError();
+        	  }           
+     }
+
+     // Story / Location Description
+     function look() {
+         var message = "";
+         switch(currentLoc) {
+            case 0: message = "You are located in a vast desert alone and you need to find your way out. You should probably start looking around.";
+                    break; 
+            case 1: message = "You have found a hidden cave!";
+                    break; 
+            case 2: message = "While exploring this cave you think you hear something. Should you go further?";
+                    break;
+            case 3: message = "Upon further exploration you have found another human named Jeff!";
+                    break;
+            case 4: message = "Jeff is very grateful for finding him. As your reward he proceeds to tell you how to escape the desert! You Win!";
+                    break;
+            default: message ="";
+         }
+         checkScore();
+         message = message + "\n" + "Score: " + score ;
+         displayMessage(message);
+      }
+     
+     function navigationError() {
+         navigationErrorCount = navigationErrorCount + 1;
+         if (navigationErrorCount < sarcasmThreshold) {
+            displayMessage("You cannot go that way.");
+         } else {
+            displayMessage("You have been attacked by a wild creature and died! Better luck next time!");
+         }          
+      }
+     // Score
+     function checkScore() {
+         if (! hasVisitedLoc0) {            
+            if (currentLoc === 0) {
+               score = 0;
+               hasVisitedLoc0 = true;
+            }
+         } else if ( (! hasVisitedLoc1) && (currentLoc === 1) ) {            
+               score = score + 5;
+               hasVisitedLoc1 = true;
+         } else if ( (! hasVisitedLoc2) && (currentLoc === 2) ) {            
+               score = score + 5;
+               hasVisitedLoc2 = true;
+         } else if ( (! hasVisitedLoc3) && (currentLoc === 3) ) {            
+               score = score + 5;
+               hasVisitedLoc3 = true;
+         } else if ( (! hasVisitedLoc4) && (currentLoc === 4) ) {            
+               score = score + 5;
+               hasVisitedLoc4 = true;
+         }            
+      }
+     function displayMessage(msg) {
+         var target = document.getElementById("taMain");
+         target.value = msg + "\n\n";
+      } 
+	</script>
+	</head>
+	<body style="background-color:#ffcc00;" onload="init();">
+		<h1 style="text-align:center;font-size:300%;color:white;">Welcome to Desert Adventure!</h1>
+		<p style="text-align:center;color:white;">Any Problems? Contact me <a href = "mailto:kyle.napolitano3@marist.edu">here.</a></p>
+		<input type="button" 
+               value="North"
+               onclick="btnNorth_click();">
+        <input type="button" 
+               value="South"
+               onclick="btnSouth_click();">
+        <input type="button" 
+               value="East"
+               onclick="btnEast_click();">
+        <input type="button" 
+               value="West"
+               onclick="btnWest_click();">
+               
+        <br />
+       <textarea id="taMain" rows="8" cols="32"></textarea>
+	</body>
+</html>
