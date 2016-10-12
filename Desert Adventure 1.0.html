@@ -5,8 +5,8 @@
 	<title>Desert Adventure</title>
 	<!--
 	Kyle Napolitano
-	10/3/2016
-	Project 2
+	10/17/2016
+	Project 3
 	 -->
 	<script type="text/javascript">
 	var currentLoc = 0;
@@ -30,12 +30,16 @@
     function btnNorth_click() {
         if (currentLoc === 0) {
             currentLoc = 1;
+            document.getElementById("northBtn").disabled = true;
             look();               
       } else if(currentLoc === 4){
         	currentLoc = 5;
+        	document.getElementById("eastBtn").disabled = true;
+        	document.getElementById("southBtn").disabled = true;
         	look();
-      } else {navigationError();
-        	  }            
+      } else {
+      		navigationError();
+       	}            
      }
 
     
@@ -43,27 +47,33 @@
         if (currentLoc === 2) {
            currentLoc = 3;
            look();               
-        }  else {navigationError();	 
-        	  }           
+        }else{
+        	navigationError();	 
+       	}           
      }
     
     function btnEast_click() {
         if (currentLoc === 1) {
            currentLoc = 2;
+           document.getElementById("northBtn").disabled = false;
            look();               
-        }  else {navigationError();	
-        	  }           
+        }else{
+        	navigationError();	
+        }           
      }
     
     function btnWest_click() {
-        if (currentLoc === 3) {
-           currentLoc = 4;
-           look();               
+      if (currentLoc === 3) {
+         currentLoc = 4;
+         look();               
       } else if(currentLoc === 5){
-        	currentLoc = 6;
-        	look();  
-      } else {navigationError();
-        	  }           
+          currentLoc = 6;
+          document.getElementById("eastBtn").disabled = false;
+          document.getElementById("southBtn").disabled = false;
+          look();  
+      } else{
+      	  navigationError();
+       	}           
      }
 
      // Story / Location Description
@@ -106,26 +116,28 @@
                score = 0;
                hasVisitedLoc0 = true;
             }
-         } else if ( (! hasVisitedLoc1) && (currentLoc === 1) ) {            
+         } else if ( (!hasVisitedLoc1) && (currentLoc === 1) ) {            
                score = score + 5;
                hasVisitedLoc1 = true;
-         } else if ( (! hasVisitedLoc2) && (currentLoc === 2) ) {            
+         } else if ( (!hasVisitedLoc2) && (currentLoc === 2) ) {            
                score = score + 5;
                hasVisitedLoc2 = true;
-         } else if ( (! hasVisitedLoc3) && (currentLoc === 3) ) {            
+         } else if ( (!hasVisitedLoc3) && (currentLoc === 3) ) {            
                score = score + 5;
                hasVisitedLoc3 = true;
-         } else if ( (! hasVisitedLoc4) && (currentLoc === 4) ) {            
+         } else if ( (!hasVisitedLoc4) && (currentLoc === 4) ) {            
                score = score + 5;
                hasVisitedLoc4 = true;
-         } else if ( (! hasVisitedLoc5) && (currentLoc === 5) ) {            
+         } else if ( (!hasVisitedLoc5) && (currentLoc === 5) ) {            
                score = score + 5;
                hasVisitedLoc5 = true;
-         } else if ( (! hasVisitedLoc6) && (currentLoc === 6) ) {            
+         } else if ( (!hasVisitedLoc6) && (currentLoc === 6) ) {            
                score = score + 5;
                hasVisitedLoc6 = true;      
          }            
       }
+      
+      //Update Display function
      function displayMessage(msg) {
          var target = document.getElementById("taMain");
          target.value = msg + "\n\n";
@@ -140,6 +152,9 @@
       		btnWest_click(); //Run west command if input is W or w
       	}else if(input == 'e' || input == 'E'){
       		btnEast_click(); //Run east command if input is E or e
+      	}else{
+      		displayMessage('Invalid command! Try using N, S, E, W, n, s, e, w');
+      	}
       }
 	</script>
 	</head>
@@ -148,16 +163,20 @@
 		<p style="text-align:center;color:white;">Any Problems? Contact me <a href = "mailto:kyle.napolitano3@marist.edu">here.</a></p>
 		<input type="button" 
                value="North"
-               onclick="btnNorth_click();">
+               onclick="btnNorth_click();"
+               id="northBtn">
         <input type="button" 
                value="South"
-               onclick="btnSouth_click();">
+               onclick="btnSouth_click();"
+               id="southBtn">
         <input type="button" 
                value="East"
-               onclick="btnEast_click();">
+               onclick="btnEast_click();"
+               id="eastBtn">
         <input type="button" 
                value="West"
-               onclick="btnWest_click();">
+               onclick="btnWest_click();"
+               id="westBtn">
                
         <br />
         <textarea id="taMain" rows="8" cols="32"></textarea>
