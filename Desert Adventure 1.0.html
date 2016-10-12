@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <title>Desert Adventure</title>
-    <!--
-    Kyle Napolitano
-    10/3/2016
-    Project 2
-    -->
-    <script type="text/javascript">
-    var currentLoc = 0;
-    var score = 0;
-    var navigationErrorCount = 0;
+	<head>
+	<meta charset="UTF-8">
+	<title>Desert Adventure</title>
+	<!--
+	Kyle Napolitano
+	10/3/2016
+	Project 2
+	 -->
+	<script type="text/javascript">
+	var currentLoc = 0;
+	var score = 0;
+	var navigationErrorCount = 0;
     var sarcasmThreshold = 5;
-    var hasVisitedLoc0 = false;
+	var hasVisitedLoc0 = false;
     var hasVisitedLoc1 = false;
     var hasVisitedLoc2 = false;
     var hasVisitedLoc3 = false;
     var hasVisitedLoc4 = false;
-  
+    var hasVisitedLoc5 = false;
+    var hasVisitedLoc6 = false;
+    
 	// Init.    
     function init() {
         look();
@@ -27,9 +29,12 @@
     // Button Functions
     function btnNorth_click() {
         if (currentLoc === 0) {
-           currentLoc = 1;
-           look();               
-        }else{navigationError();
+            currentLoc = 1;
+            look();               
+      } else if(currentLoc === 4){
+        	currentLoc = 5;
+        	look();
+      } else {navigationError();
         	  }            
      }
 
@@ -38,7 +43,7 @@
         if (currentLoc === 2) {
            currentLoc = 3;
            look();               
-        }else{navigationError();	 
+        }  else {navigationError();	 
         	  }           
      }
     
@@ -46,7 +51,7 @@
         if (currentLoc === 1) {
            currentLoc = 2;
            look();               
-        }else{navigationError();	
+        }  else {navigationError();	
         	  }           
      }
     
@@ -54,7 +59,10 @@
         if (currentLoc === 3) {
            currentLoc = 4;
            look();               
-        }else{navigationError();
+      } else if(currentLoc === 5){
+        	currentLoc = 6;
+        	look();  
+      } else {navigationError();
         	  }           
      }
 
@@ -70,8 +78,12 @@
                     break;
             case 3: message = "Upon further exploration you have found another human named Jeff!";
                     break;
-            case 4: message = "Jeff is very grateful for finding him. As your reward he proceeds to tell you how to escape the desert! You Win!";
+            case 4: message = "Jeff is very grateful for finding him. As your reward he proceeds to tell you how to escape the desert!";
                     break;
+            case 5: message = "Jeff wants to show you his town and his family so he can truly thank you. You two start your journey to Middletown(Jeff's home).";
+            		break;
+            case 6: message = "Jeff feels the need to warn you that the journey back to his hometown is very dangerous. The path is filled with robbers and wild creatures. Will you continue onward to Jeff's house?";
+            		break;
             default: message ="";
          }
          checkScore();
@@ -106,12 +118,29 @@
          } else if ( (! hasVisitedLoc4) && (currentLoc === 4) ) {            
                score = score + 5;
                hasVisitedLoc4 = true;
+         } else if ( (! hasVisitedLoc5) && (currentLoc === 5) ) {            
+               score = score + 5;
+               hasVisitedLoc5 = true;
+         } else if ( (! hasVisitedLoc6) && (currentLoc === 6) ) {            
+               score = score + 5;
+               hasVisitedLoc6 = true;      
          }            
       }
      function displayMessage(msg) {
          var target = document.getElementById("taMain");
          target.value = msg + "\n\n";
       } 
+      function btnGo_click(){
+      	var input = document.getElementById('txtCommand').value;
+      	if(input == 'n' || input == 'N'){
+      		btnNorth_click(); //Run north command if input is N or n
+      	}else if(input == 's' || input == 'S'){
+      		btnSouth_click(); //Run south command if input is S or s
+      	}else if(input == 'w' || input == 'W'){
+      		btnWest_click(); //Run west command if input is W or w
+      	}else if(input == 'e' || input == 'E'){
+      		btnEast_click(); //Run east command if input is E or e
+      }
 	</script>
 	</head>
 	<body style="background-color:#ffcc00;" onload="init();">
@@ -132,5 +161,17 @@
                
         <br />
         <textarea id="taMain" rows="8" cols="32"></textarea>
+        
+        <br>
+        Command:       
+        <input type="text" 
+               id = "txtCommand"
+               name="txtCommand">
+
+        <input type="button"
+               value="Go" 
+               onclick="btnGo_click();" />                           
+       
+        <br>
 	</body>
 </html>
