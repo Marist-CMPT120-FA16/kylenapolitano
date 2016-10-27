@@ -5,24 +5,33 @@
 	<title>Desert Adventure</title>
 	<!--
 	Kyle Napolitano
-	10/17/2016
-	Project 3
+	10/26/2016
+	Project 4
 	 -->
-	<script type="text/javascript">
+  <script type="text/javascript" src="file:///Users/Kyle/Documents/locations.js"></script>
+	<script>
 	var currentLoc = 0;
 	var score = 0;
 	var navigationErrorCount = 0;
-    var sarcasmThreshold = 5;
+  var sarcasmThreshold = 5;
 	var hasVisitedLoc0 = false;
-    var hasVisitedLoc1 = false;
-    var hasVisitedLoc2 = false;
-    var hasVisitedLoc3 = false;
-    var hasVisitedLoc4 = false;
-    var hasVisitedLoc5 = false;
-    var hasVisitedLoc6 = false;
+  var hasVisitedLoc1 = false;
+  var hasVisitedLoc2 = false;
+  var hasVisitedLoc3 = false;
+  var hasVisitedLoc4 = false;
+  var hasVisitedLoc5 = false;
+  var hasVisitedLoc6 = false;
+  var hasVisitedLoc7 = false;
+  var hasVisitedLoc8 = false;
+  var hasVisitedLoc9 = false;
+
+  var swordTaken = false;
+  var mapTaken = false;
+  var flashlightTaken = false;
+  var items = ["water", "food"];
     
 	// Init.    
-    function init() {
+    function init(){
         look();
      }
     
@@ -32,11 +41,16 @@
             currentLoc = 1;
             document.getElementById("northBtn").disabled = true;
             look();               
-      } else if(currentLoc === 4){
+      } else if(currentLoc === 4) {
         	currentLoc = 5;
         	document.getElementById("eastBtn").disabled = true;
         	document.getElementById("southBtn").disabled = true;
         	look();
+      } else if(currentLoc === 7) {
+          currentLoc = 8;
+          document.getElementById("southBtn").disabled = true;
+          document.getElementById("westBtn").disabled = false;
+          look();
       } else {
       		navigationError();
        	}            
@@ -46,8 +60,14 @@
     function btnSouth_click() {
         if (currentLoc === 2) {
            currentLoc = 3;
+           document.getElementById("westBtn").disabled = false;
+           document.getElementById("northBtn").disabled = true;
            look();               
-        }else{
+      } else if(currentLoc === 6) {
+          currentLoc = 7
+          document.getElementById("westBtn").disabled = true;
+          look();
+      } else {
         	navigationError();	 
        	}           
      }
@@ -56,8 +76,15 @@
         if (currentLoc === 1) {
            currentLoc = 2;
            document.getElementById("northBtn").disabled = false;
+           document.getElementById("westBtn").disabled = true;
            look();               
-        }else{
+      } else if(currentLoc === 8){
+          currentLoc = 9
+          document.getElementById("southBtn").disabled = false;
+          document.getElementById("westBtn").disabled = true;
+          look();
+      }
+        else {
         	navigationError();	
         }           
      }
@@ -65,11 +92,14 @@
     function btnWest_click() {
       if (currentLoc === 3) {
          currentLoc = 4;
+         document.getElementById("southBtn").disabled = true;
+         document.getElementById("northBtn").disabled = false;
          look();               
-      } else if(currentLoc === 5){
+      } else if(currentLoc === 5) {
           currentLoc = 6;
           document.getElementById("eastBtn").disabled = false;
           document.getElementById("southBtn").disabled = false;
+          document.getElementById("westBtn").disabled = true;
           look();  
       } else{
       	  navigationError();
@@ -80,25 +110,55 @@
      function look() {
          var message = "";
          switch(currentLoc) {
-            case 0: message = "You are located in a vast desert alone and you need to find your way out. You should probably start looking around.";
+            case 0: message = start();
                     break; 
-            case 1: message = "You have found a hidden cave!";
+            case 1: message = cave();
                     break; 
-            case 2: message = "While exploring this cave you think you hear something. Should you go further?";
+            case 2: message = cave1();
                     break;
-            case 3: message = "Upon further exploration you have found another human named Jeff!";
+            case 3: message = jeff();
                     break;
-            case 4: message = "Jeff is very grateful for finding him. As your reward he proceeds to tell you how to escape the desert!";
+            case 4: message = escape_cave();
                     break;
-            case 5: message = "Jeff wants to show you his town and his family so he can truly thank you. You two start your journey to Middletown(Jeff's home).";
-            		break;
-            case 6: message = "Jeff feels the need to warn you that the journey back to his hometown is very dangerous. The path is filled with robbers and wild creatures. Will you continue onward to Jeff's house?";
-            		break;
+            case 5: message = journey_middletown();
+            		    break;
+            case 6: message = jeffs_warning();
+            		    break;
+            case 7: message = journey_start();
+                    break;
+            case 8: message = journey_woods();
+                    break;
+            case 9: message = journey_woods_prefight();
+                    break;
             default: message ="";
          }
          checkScore();
          message = message + "\n" + "Score: " + score ;
          displayMessage(message);
+         list();
+      }
+
+      function addItemList(input){
+        var list = document.getElementById("itemList");
+        var entry = document.createElement('li');
+        entry.appendChild(document.createTextNode(input));
+        list.appendChild(entry);
+      }
+
+      function take(input){
+        if(currentLoc == 5 && input.toLowerCase() == 'map' && mapTaken == false){
+          addItemList(input);
+          mapTaken = true;
+        }else if(currentLoc == 4 && input.toLowerCase() == 'sword' && swordTaken == false){
+          addItemList(input);
+          swordTaken = true;
+        }else if(currentLoc == 7 && input.toLowerCase() == 'flashlight' && flashlightTaken == false){
+          addItemList(input);
+          flashlightTaken = true;
+        }else{
+          displayMessage("Item does not exist");
+        }
+
       }
      
      function navigationError() {
@@ -134,14 +194,28 @@
          } else if ( (!hasVisitedLoc6) && (currentLoc === 6) ) {            
                score = score + 5;
                hasVisitedLoc6 = true;      
-         }            
+         }  else if ( (!hasVisitedLoc7) && (currentLoc === 7) ) {            
+               score = score + 5;
+               hasVisitedLoc7 = true;
+         }  else if ( (!hasVisitedLoc8) && (currentLoc === 8) ) {            
+               score = score + 5;
+               hasVisitedLoc8 = true;
+         }  else if ( (!hasVisitedLoc9) && (currentLoc === 9) ) {            
+               score = score + 5;
+               hasVisitedLoc9 = true;
+         }                  
       }
       
       //Update Display function
      function displayMessage(msg) {
          var target = document.getElementById("taMain");
          target.value = msg + "\n\n";
-      } 
+      }
+
+      function help(){
+        displayMessage("Try using N, S, E, W, n, s, e, w\nIf you find an item use the phrase 'take (item)'\nIf you get stuck don't give up! Keep trying!");
+      }
+
       function btnGo_click(){
       	var input = document.getElementById('txtCommand').value;
       	if(input == 'n' || input == 'N'){
@@ -152,13 +226,17 @@
       		btnWest_click(); //Run west command if input is W or w
       	}else if(input == 'e' || input == 'E'){
       		btnEast_click(); //Run east command if input is E or e
-      	}else{
+      	}else if(input.toLowerCase() == "help"){
+            help();
+        }else if(input.substring(0,4).toLowerCase() == "take"){
+            take(input.substring(5,input.length));
+        }else{
       		displayMessage('Invalid command! Try using N, S, E, W, n, s, e, w');
       	}
       }
 	</script>
 	</head>
-	<body style="background-color:#ffcc00;" onload="init();">
+	<body style="background-color:#ffcc00" onload="init()">
 		<h1 style="text-align:center;font-size:300%;color:white;">Welcome to Desert Adventure!</h1>
 		<p style="text-align:center;color:white;">Any Problems? Contact me <a href = "mailto:kyle.napolitano3@marist.edu">here.</a></p>
 		<input type="button" 
@@ -192,5 +270,10 @@
                onclick="btnGo_click();" />                           
        
         <br>
+  <h2>Items:</h2>
+  <ol id="itemList">
+  <li>water</li>
+  <li>food</li>
+  </ol>
 	</body>
 </html>

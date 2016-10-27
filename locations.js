@@ -1,7 +1,7 @@
 
 
 function start(){
-	var description = "You are located in a vast desert alone and you need to find your way out. You should probably start looking around.";
+	var description = "You find yourself located in a vast desert alone and you need to find your way out. All you have is water and some leftover food. You should probably start looking around. Type help for instructions!";
 	return description;	
 }
 
@@ -21,12 +21,12 @@ function jeff(){
 }
 
 function escape_cave(){
-	var description = "Jeff is very grateful for finding him. As your reward he proceeds to tell you how to escape the desert!";
+	var description = "Jeff is very grateful for finding him. As your reward he proceeds to tell you how to escape the desert as well as giving you a sword!";
 	return description;
 }
 
 function journey_middletown(){
-	var description = "Jeff wants to show you his town and his family so he can truly thank you. You two start your journey to Middletown(Jeff's home).";
+	var description = "Jeff wants to show you his town and his family so he can truly thank you. Jeff gives you a map so you can get an idea of your surroundings. You two start your journey to Middletown(Jeff's home).";
 	return description;
 }
 
@@ -36,12 +36,12 @@ function jeffs_warning(){
 }
 
 function journey_start(){
-	var description = "You have decided to continue onward to Jeff's house!";
+	var description = "You have decided to continue onward to Jeff's house! You find a flashlight on the ground";
 	return description;
 }
 
 function journey_woods(){
-	var description = "Your first challenge is to get through the woods. Jeff has already told you about the dangers that reside in there.";
+	var description = "Your first challenge is to get through the woods. Jeff has already told you about the dangers that reside in there. Time to get your sword ready.";
 	return description;
 }
 
