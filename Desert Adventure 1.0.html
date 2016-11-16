@@ -1,36 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< Updated upstream
-<head>
-<meta charset="UTF-8">
-<title>Desert Adventure</title>
-<!--
-Kyle Napolitano
-10/26/2016
-Project 4
--->
-  <script type="text/javascript" src="locations.js"></script>
-  <script>
-  var currentLoc = 0;
-  var score = 0;
-  var navigationErrorCount = 0;
-=======
 	<head>
 	<meta charset="UTF-8">
 	<title>Desert Adventure</title>
 	<!--
 	Kyle Napolitano
-	10/26/2016
-	Project 4
+	11/16/2016
+	Project 5
 	 -->
   <script type="text/javascript" src="locations.js"></script>
 	<script>
 	var currentLoc = 0;
 	var score = 0;
 	var navigationErrorCount = 0;
->>>>>>> Stashed changes
   var sarcasmThreshold = 5;
-  var hasVisitedLoc0 = false;
+	var hasVisitedLoc0 = false;
   var hasVisitedLoc1 = false;
   var hasVisitedLoc2 = false;
   var hasVisitedLoc3 = false;
@@ -40,15 +24,10 @@ Project 4
   var hasVisitedLoc7 = false;
   var hasVisitedLoc8 = false;
   var hasVisitedLoc9 = false;
-	  
+
   var swordTaken = false;
   var mapTaken = false;
   var flashlightTaken = false;
-  var items = ["water", "food"];
-<<<<<<< Updated upstream
-    
-    // Init.    
-=======
 
   function Location(id,name,description,item){
     this.id=id;
@@ -56,9 +35,38 @@ Project 4
     this.description=description;
     this.item=item;
     this.toString=function() {return "id:" + this.id + " location: " + this.name;}; 
-  }  
+  }
+
+  var start_loc = new Location(0, 'Start', start(), '');
+  var cave_loc = new Location(1, 'Cave', cave(), '')
+  var cave1_loc = new Location(2, 'Cave1', cave1(), '')
+  var jeff_loc = new Location(3, 'Jeff', jeff(), '')
+  var escape_cave_loc = new Location(4, 'Escape_Cave', escape_cave(), '')
+  var journey_middletown_loc = new Location(5, 'Journey_Middletown', journey_middletown(), '')
+  var jeffs_warning_loc = new Location(6, 'Jeffs_Warning', jeffs_warning(), '')
+  var journey_start_loc = new Location(7, 'Journey_Start', journey_start(), '')
+  var journey_woods_loc = new Location(8, 'Journey_Woods', journey_woods(), '')
+  var journey_woods_prefight_loc = new Location(9, 'Journey_Woods_Prefight', journey_woods_prefight(), '')
+
+  //Global array for locations
+  var locations = [start_loc, cave_loc, cave1_loc, jeff_loc, escape_cave_loc, journey_middletown_loc, jeffs_warning_loc, journey_start_loc, journey_woods_loc, journey_woods_prefight_loc]
+
+  function Item(id,name,description){
+    this.id=id;
+    this.name=name;
+    this.description=description;
+    this.toString=function() {return "id:" + this.id + " item: " + this.name;}; 
+  }
+
+  var water = new Item(0, 'Water', 'Bottled Water');
+  var food = new Item(1, 'Food', 'Canned Food');
+  var sword = new Item(2, 'Sword', 'Sword');
+  var map = new Item(3, 'Map', 'Map')
+  var flashlight = new Item(4, 'Flashlight', 'Bright Flashlight')
+
+  //Global array for items
+  var items = [water, food];
 	// Init.    
->>>>>>> Stashed changes
     function init(){
         look();
      }
@@ -66,16 +74,16 @@ Project 4
     // Button Functions
     function btnNorth_click() {
         if (currentLoc === 0) {
-            currentLoc = 1;
+            currentLoc = locations[1].id;
             document.getElementById("northBtn").disabled = true;
             look();               
       } else if(currentLoc === 4) {
-        	currentLoc = 5;
+        	currentLoc = locations[5].id;
         	document.getElementById("eastBtn").disabled = true;
         	document.getElementById("southBtn").disabled = true;
         	look();
       } else if(currentLoc === 7) {
-          currentLoc = 8;
+          currentLoc = locations[8].id;
           document.getElementById("southBtn").disabled = true;
           document.getElementById("westBtn").disabled = false;
           look();
@@ -87,12 +95,12 @@ Project 4
     
     function btnSouth_click() {
         if (currentLoc === 2) {
-           currentLoc = 3;
+           currentLoc = locations[3].id;
            document.getElementById("westBtn").disabled = false;
            document.getElementById("northBtn").disabled = true;
            look();               
       } else if(currentLoc === 6) {
-          currentLoc = 7
+          currentLoc = locations[7].id;
           document.getElementById("westBtn").disabled = true;
           look();
       } else {
@@ -102,12 +110,12 @@ Project 4
     
     function btnEast_click() {
         if (currentLoc === 1) {
-           currentLoc = 2;
+           currentLoc = locations[2].id;
            document.getElementById("northBtn").disabled = false;
            document.getElementById("westBtn").disabled = true;
            look();               
       } else if(currentLoc === 8){
-          currentLoc = 9
+          currentLoc = locations[9].id;
           document.getElementById("southBtn").disabled = false;
           document.getElementById("westBtn").disabled = true;
           look();
@@ -119,12 +127,12 @@ Project 4
     
     function btnWest_click() {
       if (currentLoc === 3) {
-         currentLoc = 4;
+         currentLoc = locations[4].id;
          document.getElementById("southBtn").disabled = true;
          document.getElementById("northBtn").disabled = false;
          look();               
       } else if(currentLoc === 5) {
-          currentLoc = 6;
+          currentLoc = locations[6].id;
           document.getElementById("eastBtn").disabled = false;
           document.getElementById("southBtn").disabled = false;
           document.getElementById("westBtn").disabled = true;
@@ -138,25 +146,25 @@ Project 4
      function look() {
          var message = "";
          switch(currentLoc) {
-            case 0: message = start();
+            case 0: message = locations[0].description;
                     break; 
-            case 1: message = cave();
+            case 1: message = locations[1].description;
                     break; 
-            case 2: message = cave1();
+            case 2: message = locations[2].description;
                     break;
-            case 3: message = jeff();
+            case 3: message = locations[3].description;
                     break;
-            case 4: message = escape_cave();
+            case 4: message = locations[4].description;
                     break;
-            case 5: message = journey_middletown();
+            case 5: message = locations[5].description;
             		    break;
-            case 6: message = jeffs_warning();
+            case 6: message = locations[6].description;
             		    break;
-            case 7: message = journey_start();
+            case 7: message = locations[7].description;
                     break;
-            case 8: message = journey_woods();
+            case 8: message = locations[8].description;
                     break;
-            case 9: message = journey_woods_prefight();
+            case 9: message = locations[9].description;
                     break;
             default: message ="";
          }
@@ -174,19 +182,30 @@ Project 4
 
       function take(input){
         if(currentLoc == 5 && input.toLowerCase() == 'map' && mapTaken == false){
-          addItemList(input);
+          addItemList(map.name);
           mapTaken = true;
+          items.push(map);
         }else if(currentLoc == 4 && input.toLowerCase() == 'sword' && swordTaken == false){
-          addItemList(input);
+          addItemList(sword.name);
           swordTaken = true;
+          items.push(sword);
         }else if(currentLoc == 7 && input.toLowerCase() == 'flashlight' && flashlightTaken == false){
-          addItemList(input);
+          addItemList(flashlight.name);
           flashlightTaken = true;
+          items.push(flashlight);
         }else{
           displayMessage("Item does not exist");
         }
 
       }
+
+     function inventory(){
+        var itemsString = 'You have:';
+        for(var i = 0; i < items.length; i++){
+          itemsString = itemsString + " " + items[i].name;
+        }
+        displayMessage(itemsString);
+     }
      
      function navigationError() {
          navigationErrorCount = navigationErrorCount + 1;
@@ -199,6 +218,7 @@ Project 4
             document.getElementById("westBtn").disabled = true;
             document.getElementById("eastBtn").disabled = true;
             document.getElementById("txtCommand").disabled = true;
+            document.getElementById("goBtn").disabled = true;
          }          
       }
      // Score
@@ -260,6 +280,8 @@ Project 4
       		btnEast_click(); //Run east command if input is E or e
       	}else if(input.toLowerCase() == "help"){
             help();
+        }else if(input.toLowerCase() == 'i'){
+            inventory();
         }else if(input.substring(0,4).toLowerCase() == "take"){
             take(input.substring(5,input.length));
         }else{
@@ -298,24 +320,16 @@ Project 4
                name="txtCommand">
 
         <input type="button"
-               value="Go" 
+               value="Go"
+               id="goBtn" 
                onclick="btnGo_click();" />                           
        
         <br>
-<<<<<<< Updated upstream
-  	<h2>Items:</h2>
-  	<ol id="itemList">
-  	<li>water</li>
-  	<li>food</li>
-  	</ol>
-  	<img src="gamemap.png" style="width:400;height:400;">
-=======
         <h2>Items:</h2>
         <ol id="itemList">
         <li>water</li>
         <li>food</li>
         </ol>
         <img src="gamemap.png" style="width:400;height:400;">
->>>>>>> Stashed changes
 	</body>
 </html>
