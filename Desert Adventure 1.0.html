@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< Updated upstream
 <head>
 <meta charset="UTF-8">
 <title>Desert Adventure</title>
@@ -13,6 +14,21 @@ Project 4
   var currentLoc = 0;
   var score = 0;
   var navigationErrorCount = 0;
+=======
+	<head>
+	<meta charset="UTF-8">
+	<title>Desert Adventure</title>
+	<!--
+	Kyle Napolitano
+	10/26/2016
+	Project 4
+	 -->
+  <script type="text/javascript" src="locations.js"></script>
+	<script>
+	var currentLoc = 0;
+	var score = 0;
+	var navigationErrorCount = 0;
+>>>>>>> Stashed changes
   var sarcasmThreshold = 5;
   var hasVisitedLoc0 = false;
   var hasVisitedLoc1 = false;
@@ -29,8 +45,20 @@ Project 4
   var mapTaken = false;
   var flashlightTaken = false;
   var items = ["water", "food"];
+<<<<<<< Updated upstream
     
     // Init.    
+=======
+
+  function Location(id,name,description,item){
+    this.id=id;
+    this.name=name;
+    this.description=description;
+    this.item=item;
+    this.toString=function() {return "id:" + this.id + " location: " + this.name;}; 
+  }  
+	// Init.    
+>>>>>>> Stashed changes
     function init(){
         look();
      }
@@ -166,6 +194,11 @@ Project 4
             displayMessage("You cannot go that way.");
          } else {
             displayMessage("You have been attacked by a wild creature and died! Better luck next time!");
+            document.getElementById("southBtn").disabled = true;
+            document.getElementById("northBtn").disabled = true;
+            document.getElementById("westBtn").disabled = true;
+            document.getElementById("eastBtn").disabled = true;
+            document.getElementById("txtCommand").disabled = true;
          }          
       }
      // Score
@@ -269,11 +302,20 @@ Project 4
                onclick="btnGo_click();" />                           
        
         <br>
+<<<<<<< Updated upstream
   	<h2>Items:</h2>
   	<ol id="itemList">
   	<li>water</li>
   	<li>food</li>
   	</ol>
   	<img src="gamemap.png" style="width:400;height:400;">
+=======
+        <h2>Items:</h2>
+        <ol id="itemList">
+        <li>water</li>
+        <li>food</li>
+        </ol>
+        <img src="gamemap.png" style="width:400;height:400;">
+>>>>>>> Stashed changes
 	</body>
 </html>
