@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta charset="UTF-8">
-  <title>Desert Adventure</title>
-  <!--
-  Kyle Napolitano
-  11/16/2016
-  Project 5
-  -->
+	<head>
+	<meta charset="UTF-8">
+	<title>Desert Adventure</title>
+	<!--
+	Kyle Napolitano
+	11/16/2016
+	Project 5
+	 -->
   <script type="text/javascript" src="locations.js"></script>
-  <script>
-  var currentLoc = 0;
-  var score = 0;
-  var navigationErrorCount = 0;
+	<script>
+	var currentLoc = 0;
+	var score = 0;
+	var navigationErrorCount = 0;
   var sarcasmThreshold = 5;
-  var hasVisitedLoc0 = false;
+	var hasVisitedLoc0 = false;
   var hasVisitedLoc1 = false;
   var hasVisitedLoc2 = false;
   var hasVisitedLoc3 = false;
@@ -230,33 +230,7 @@
      // Story / Location Description
      function look() {
          var message = "";
-<<<<<<< HEAD
          message = locations[currentLoc].description;
-=======
-         switch(currentLoc) {
-            case 0: message = locations[0].description;
-                    break; 
-            case 1: message = locations[1].description;
-                    break; 
-            case 2: message = locations[2].description;
-                    break;
-            case 3: message = locations[3].description;
-                    break;
-            case 4: message = locations[4].description;
-                    break;
-            case 5: message = locations[5].description;
-            	    break;
-            case 6: message = locations[6].description;
-            	    break;
-            case 7: message = locations[7].description;
-                    break;
-            case 8: message = locations[8].description;
-                    break;
-            case 9: message = locations[9].description;
-                    break;
-            default: message ="";
-         }
->>>>>>> origin/master
          checkScore();
          message = message + "\n" + "Score: " + score ;
          displayMessage(message);
