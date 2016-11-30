@@ -49,3 +49,8 @@ function journey_woods_prefight(){
 	var description = "Upon entering the woods you get a bad feeling about this. Its too eerie for your liking.";
 	return description;
 }
+
+function ending(){
+	var description = "You somehow manage to find your way out of the woods without conflict and you find your way to Middletown!";
+	return description;
+}

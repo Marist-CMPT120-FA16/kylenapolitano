@@ -47,9 +47,9 @@
   var journey_start_loc = new Location(7, 'Journey_Start', journey_start(), '')
   var journey_woods_loc = new Location(8, 'Journey_Woods', journey_woods(), '')
   var journey_woods_prefight_loc = new Location(9, 'Journey_Woods_Prefight', journey_woods_prefight(), '')
-
+  var ending = new Location(10, 'End', ending(), '')
   //Global array for locations
-  var locations = [start_loc, cave_loc, cave1_loc, jeff_loc, escape_cave_loc, journey_middletown_loc, jeffs_warning_loc, journey_start_loc, journey_woods_loc, journey_woods_prefight_loc]
+  var locations = [start_loc, cave_loc, cave1_loc, jeff_loc, escape_cave_loc, journey_middletown_loc, jeffs_warning_loc, journey_start_loc, journey_woods_loc, journey_woods_prefight_loc, ending]
 
   function Item(id,name,description){
     this.id=id;
@@ -66,7 +66,8 @@
 
   //Global array for items
   var items = [water, food];
-	// Init.    
+	
+  // Init.    
     function init(){
         look();
      }
@@ -76,16 +77,36 @@
         if (currentLoc === 0) {
             currentLoc = locations[1].id;
             document.getElementById("northBtn").disabled = true;
+            document.getElementById("eastBtn").disabled = false;
+            document.getElementById("southBtn").disabled = false;
+            document.getElementById("westBtn").disabled = true;
             look();               
+      } else if(currentLoc === 3){
+          currentLoc = locations[2].id;
+          document.getElementById("northBtn").disabled = true;
+          document.getElementById("eastBtn").disabled = true;
+          document.getElementById("southBtn").disabled = false;
+          document.getElementById("westBtn").disabled = false;
+          look();
       } else if(currentLoc === 4) {
         	currentLoc = locations[5].id;
         	document.getElementById("eastBtn").disabled = true;
-        	document.getElementById("southBtn").disabled = true;
-        	look();
-      } else if(currentLoc === 7) {
-          currentLoc = locations[8].id;
-          document.getElementById("southBtn").disabled = true;
+        	document.getElementById("southBtn").disabled = false;
+          document.getElementById("northBtn").disabled = true;
           document.getElementById("westBtn").disabled = false;
+        	look();
+      } else if(currentLoc === 7){
+          currentLoc = locations[6].id;
+          document.getElementById("northBtn").disabled = true;
+          document.getElementById("eastBtn").disabled = true;
+          document.getElementById("southBtn").disabled = false;
+          document.getElementById("westBtn").disabled = false;
+          look();
+      } else if(currentLoc === 8){
+          currentLoc = locations[9].id;
+          document.getElementById("southBtn").disabled = false;
+          document.getElementById("westBtn").disabled = false;
+          document.getElementById("northBtn").disabled = true;
           look();
       } else {
       		navigationError();
@@ -94,14 +115,33 @@
 
     
     function btnSouth_click() {
-        if (currentLoc === 2) {
-           currentLoc = locations[3].id;
-           document.getElementById("westBtn").disabled = false;
-           document.getElementById("northBtn").disabled = true;
-           look();               
+      if(currentLoc === 1){
+          currentLoc = locations[0].id;
+          document.getElementById("northBtn").disabled = false;
+          document.getElementById("eastBtn").disabled = true;
+          document.getElementById("southBtn").disabled = true;
+          document.getElementById("westBtn").disabled = true;
+          look();
+      } else if (currentLoc === 2) {
+          currentLoc = locations[3].id;
+          document.getElementById("westBtn").disabled = false;
+          document.getElementById("northBtn").disabled = false;
+          document.getElementById("eastBtn").disabled = true;
+          document.getElementById("southBtn").disabled = true;
+          look();               
+      } else if (currentLoc === 5) {
+          currentLoc = locations[4].id;
+          document.getElementById("westBtn").disabled = false;
+          document.getElementById("northBtn").disabled = false;
+          document.getElementById("eastBtn").disabled = true;
+          document.getElementById("southBtn").disabled = true;
+          look();               
       } else if(currentLoc === 6) {
           currentLoc = locations[7].id;
           document.getElementById("westBtn").disabled = true;
+          document.getElementById("northBtn").disabled = false;
+          document.getElementById("southBtn").disabled = true;
+          document.getElementById("eastBtn").disabled = false;
           look();
       } else {
         	navigationError();	 
@@ -111,33 +151,78 @@
     function btnEast_click() {
         if (currentLoc === 1) {
            currentLoc = locations[2].id;
-           document.getElementById("northBtn").disabled = false;
-           document.getElementById("westBtn").disabled = true;
+           document.getElementById("northBtn").disabled = true;
+           document.getElementById("eastBtn").disabled = true;
+           document.getElementById("southBtn").disabled = false;
+           document.getElementById("westBtn").disabled = false;
            look();               
-      } else if(currentLoc === 8){
-          currentLoc = locations[9].id;
-          document.getElementById("southBtn").disabled = false;
-          document.getElementById("westBtn").disabled = true;
+      } else if (currentLoc === 4){
+          currentLoc = locations[3].id;
+          document.getElementById("westBtn").disabled = false;
+          document.getElementById("northBtn").disabled = false;
+          document.getElementById("eastBtn").disabled = true;
+          document.getElementById("southBtn").disabled = true;
           look();
-      }
-        else {
+      } else if (currentLoc === 6){
+          currentLoc = locations[5].id;
+          document.getElementById("westBtn").disabled = false;
+          document.getElementById("northBtn").disabled = true;
+          document.getElementById("eastBtn").disabled = true;
+          document.getElementById("southBtn").disabled = false;
+          look();
+      } else if(currentLoc === 7) {
+          currentLoc = locations[8].id;
+          document.getElementById("southBtn").disabled = true;
+          document.getElementById("westBtn").disabled = false;
+          document.getElementById("northBtn").disabled = false;
+          document.getElementById("eastBtn").disabled = true;
+          look();
+      }  else {
         	navigationError();	
         }           
      }
     
     function btnWest_click() {
-      if (currentLoc === 3) {
+      if (currentLoc === 2) {
+         currentLoc = locations[1].id;
+         document.getElementById("northBtn").disabled = true;
+         document.getElementById("eastBtn").disabled = false;
+         document.getElementById("southBtn").disabled = false;
+         document.getElementById("westBtn").disabled = true;
+         look();
+     } else if (currentLoc === 3) {
          currentLoc = locations[4].id;
+         document.getElementById("eastBtn").disabled = false;
          document.getElementById("southBtn").disabled = true;
          document.getElementById("northBtn").disabled = false;
+         document.getElementById("westBtn").disabled = true;
          look();               
       } else if(currentLoc === 5) {
           currentLoc = locations[6].id;
           document.getElementById("eastBtn").disabled = false;
           document.getElementById("southBtn").disabled = false;
           document.getElementById("westBtn").disabled = true;
+          document.getElementById("northBtn").disabled = true;
           look();  
-      } else{
+      } else if (currentLoc === 8){
+          currentLoc = locations[7].id;
+          document.getElementById("westBtn").disabled = true;
+          document.getElementById("northBtn").disabled = false;
+          document.getElementById("eastBtn").disabled = false;
+          document.getElementById("southBtn").disabled = true;
+          look();
+      } else if (currentLoc === 9){
+          if(items.length == 5){
+            currentLoc = locations[10].id;
+            document.getElementById("westBtn").disabled = true;
+            document.getElementById("northBtn").disabled = false;
+            document.getElementById("eastBtn").disabled = false;
+            document.getElementById("southBtn").disabled = true;
+            look();
+          } else {
+            navigationError();
+          }
+      } else {
       	  navigationError();
        	}           
      }
@@ -145,29 +230,7 @@
      // Story / Location Description
      function look() {
          var message = "";
-         switch(currentLoc) {
-            case 0: message = locations[0].description;
-                    break; 
-            case 1: message = locations[1].description;
-                    break; 
-            case 2: message = locations[2].description;
-                    break;
-            case 3: message = locations[3].description;
-                    break;
-            case 4: message = locations[4].description;
-                    break;
-            case 5: message = locations[5].description;
-            		    break;
-            case 6: message = locations[6].description;
-            		    break;
-            case 7: message = locations[7].description;
-                    break;
-            case 8: message = locations[8].description;
-                    break;
-            case 9: message = locations[9].description;
-                    break;
-            default: message ="";
-         }
+         message = locations[currentLoc].description;
          checkScore();
          message = message + "\n" + "Score: " + score ;
          displayMessage(message);
@@ -209,7 +272,10 @@
      
      function navigationError() {
          navigationErrorCount = navigationErrorCount + 1;
-         if (navigationErrorCount < sarcasmThreshold) {
+         if(currentLoc == 9){
+          displayMessage("You do not have all the items!");
+         }
+         else if (navigationErrorCount < sarcasmThreshold) {
             displayMessage("You cannot go that way.");
          } else {
             displayMessage("You have been attacked by a wild creature and died! Better luck next time!");
@@ -253,6 +319,9 @@
                score = score + 5;
                hasVisitedLoc8 = true;
          }  else if ( (!hasVisitedLoc9) && (currentLoc === 9) ) {            
+               score = score + 5;
+               hasVisitedLoc9 = true;
+         }  else if ( (!hasVisitedLoc10) && (currentLoc === 10) ) {            
                score = score + 5;
                hasVisitedLoc9 = true;
          }                  
@@ -327,8 +396,8 @@
         <br>
         <h2>Items:</h2>
         <ol id="itemList">
-        <li>water</li>
-        <li>food</li>
+        <li>Water</li>
+        <li>Food</li>
         </ol>
         <img src="gamemap.png" style="width:400;height:400;">
 	</body>
