@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+  <head>
+  <meta charset="UTF-8">
+  <title>Desert Adventure</title>
+  <!--
+  Kyle Napolitano
+  11/16/2016
+  Project 5
+   -->
+=======
 	<head>
 	<meta charset="UTF-8">
 	<title>Desert Adventure</title>
@@ -8,6 +18,7 @@
 	11/16/2016
 	Project 5
 	 -->
+>>>>>>> origin/master
   <script type="text/javascript" src="locations.js"></script>
 	<script>
 	var currentLoc = 0;
@@ -66,166 +77,96 @@
 
   //Global array for items
   var items = [water, food];
-	
+
+  var matrix = [[cave_loc,-1,-1, -1], //Start
+                  [-1,start_loc,cave1_loc,-1], //Cave
+                  [-1,jeff_loc,-1,cave_loc], //Dirtroad
+                  [cave1_loc,-1,-1,escape_cave_loc], //Shortcut
+                  [journey_middletown_loc, -1, jeff_loc, -1], //Pizzaparlor
+                  [-1,escape_cave_loc,-1,jeffs_warning_loc], //Outside Pizza
+                  [-1,journey_start_loc,journey_middletown_loc,-1], //Tunnel
+                  [jeffs_warning_loc,-1,journey_woods_loc,-1], //Bridge
+                  [journey_woods_prefight_loc,-1,-1,journey_start_loc], //Cornfield
+                  [-1,journey_woods_loc,-1,ending]]; //River
+  
   // Init.    
     function init(){
         look();
      }
     
-    // Button Functions
-    function btnNorth_click() {
-        if (currentLoc === 0) {
-            currentLoc = locations[1].id;
-            document.getElementById("northBtn").disabled = true;
-            document.getElementById("eastBtn").disabled = false;
-            document.getElementById("southBtn").disabled = false;
-            document.getElementById("westBtn").disabled = true;
-            look();               
-      } else if(currentLoc === 3){
-          currentLoc = locations[2].id;
-          document.getElementById("northBtn").disabled = true;
-          document.getElementById("eastBtn").disabled = true;
-          document.getElementById("southBtn").disabled = false;
-          document.getElementById("westBtn").disabled = false;
-          look();
-      } else if(currentLoc === 4) {
-        	currentLoc = locations[5].id;
-        	document.getElementById("eastBtn").disabled = true;
-        	document.getElementById("southBtn").disabled = false;
-          document.getElementById("northBtn").disabled = true;
-          document.getElementById("westBtn").disabled = false;
-        	look();
-      } else if(currentLoc === 7){
-          currentLoc = locations[6].id;
-          document.getElementById("northBtn").disabled = true;
-          document.getElementById("eastBtn").disabled = true;
-          document.getElementById("southBtn").disabled = false;
-          document.getElementById("westBtn").disabled = false;
-          look();
-      } else if(currentLoc === 8){
-          currentLoc = locations[9].id;
-          document.getElementById("southBtn").disabled = false;
-          document.getElementById("westBtn").disabled = false;
-          document.getElementById("northBtn").disabled = true;
-          look();
-      } else {
-      		navigationError();
-       	}            
-     }
-
-    
-    function btnSouth_click() {
-      if(currentLoc === 1){
-          currentLoc = locations[0].id;
-          document.getElementById("northBtn").disabled = false;
-          document.getElementById("eastBtn").disabled = true;
-          document.getElementById("southBtn").disabled = true;
-          document.getElementById("westBtn").disabled = true;
-          look();
-      } else if (currentLoc === 2) {
-          currentLoc = locations[3].id;
-          document.getElementById("westBtn").disabled = false;
-          document.getElementById("northBtn").disabled = false;
-          document.getElementById("eastBtn").disabled = true;
-          document.getElementById("southBtn").disabled = true;
-          look();               
-      } else if (currentLoc === 5) {
-          currentLoc = locations[4].id;
-          document.getElementById("westBtn").disabled = false;
-          document.getElementById("northBtn").disabled = false;
-          document.getElementById("eastBtn").disabled = true;
-          document.getElementById("southBtn").disabled = true;
-          look();               
-      } else if(currentLoc === 6) {
-          currentLoc = locations[7].id;
-          document.getElementById("westBtn").disabled = true;
-          document.getElementById("northBtn").disabled = false;
-          document.getElementById("southBtn").disabled = true;
-          document.getElementById("eastBtn").disabled = false;
-          look();
-      } else {
-        	navigationError();	 
-       	}           
-     }
-    
-    function btnEast_click() {
-        if (currentLoc === 1) {
-           currentLoc = locations[2].id;
-           document.getElementById("northBtn").disabled = true;
-           document.getElementById("eastBtn").disabled = true;
-           document.getElementById("southBtn").disabled = false;
-           document.getElementById("westBtn").disabled = false;
-           look();               
-      } else if (currentLoc === 4){
-          currentLoc = locations[3].id;
-          document.getElementById("westBtn").disabled = false;
-          document.getElementById("northBtn").disabled = false;
-          document.getElementById("eastBtn").disabled = true;
-          document.getElementById("southBtn").disabled = true;
-          look();
-      } else if (currentLoc === 6){
-          currentLoc = locations[5].id;
-          document.getElementById("westBtn").disabled = false;
-          document.getElementById("northBtn").disabled = true;
-          document.getElementById("eastBtn").disabled = true;
-          document.getElementById("southBtn").disabled = false;
-          look();
-      } else if(currentLoc === 7) {
-          currentLoc = locations[8].id;
-          document.getElementById("southBtn").disabled = true;
-          document.getElementById("westBtn").disabled = false;
-          document.getElementById("northBtn").disabled = false;
-          document.getElementById("eastBtn").disabled = true;
-          look();
-      }  else {
-        	navigationError();	
-        }           
-     }
-    
-    function btnWest_click() {
-      if (currentLoc === 2) {
-         currentLoc = locations[1].id;
-         document.getElementById("northBtn").disabled = true;
-         document.getElementById("eastBtn").disabled = false;
-         document.getElementById("southBtn").disabled = false;
-         document.getElementById("westBtn").disabled = true;
-         look();
-     } else if (currentLoc === 3) {
-         currentLoc = locations[4].id;
-         document.getElementById("eastBtn").disabled = false;
-         document.getElementById("southBtn").disabled = true;
-         document.getElementById("northBtn").disabled = false;
-         document.getElementById("westBtn").disabled = true;
-         look();               
-      } else if(currentLoc === 5) {
-          currentLoc = locations[6].id;
-          document.getElementById("eastBtn").disabled = false;
-          document.getElementById("southBtn").disabled = false;
-          document.getElementById("westBtn").disabled = true;
-          document.getElementById("northBtn").disabled = true;
-          look();  
-      } else if (currentLoc === 8){
-          currentLoc = locations[7].id;
-          document.getElementById("westBtn").disabled = true;
-          document.getElementById("northBtn").disabled = false;
-          document.getElementById("eastBtn").disabled = false;
-          document.getElementById("southBtn").disabled = true;
-          look();
-      } else if (currentLoc === 9){
-          if(items.length == 5){
-            currentLoc = locations[10].id;
-            document.getElementById("westBtn").disabled = true;
-            document.getElementById("northBtn").disabled = false;
-            document.getElementById("eastBtn").disabled = false;
-            document.getElementById("southBtn").disabled = true;
-            look();
-          } else {
-            navigationError();
+   function move(direction){
+          var move = -1;
+          if(direction == 'n'){
+            move = 0;
+          }else if(direction == 's'){
+            move = 1;
+          }else if(direction == 'e'){
+            move = 2;
+          }else if(direction == 'w'){
+            move = 3;
           }
-      } else {
-      	  navigationError();
-       	}           
-     }
+
+          var location = matrix[currentLoc][move];
+
+          if(location.id === 10 && move === 3){
+            if(items.length < 4){
+              displayMessage("You must collect all items before you enter");
+            }else{
+              currentLoc = location.id;
+              document.getElementById("northBtn").disabled = true;
+              document.getElementById("southBtn").disabled = true;
+              document.getElementById("eastBtn").disabled = true;
+              document.getElementById("westBtn").disabled = true;
+              look();
+            }
+          }else if(location == -1){
+            navigationError();
+          }else{
+            currentLoc = location.id;
+            var row = matrix[currentLoc];
+            if(row[0] != -1){
+              document.getElementById("northBtn").disabled = false;
+            }else{
+              document.getElementById("northBtn").disabled = true;
+            }
+
+            if(row[1] != -1){
+              document.getElementById("southBtn").disabled = false;
+            }else{
+              document.getElementById("southBtn").disabled = true;
+            }
+
+            if(row[2] != -1){
+              document.getElementById("eastBtn").disabled = false;
+            }else{
+              document.getElementById("eastBtn").disabled = true;
+            }
+
+            if(row[3] != -1){
+              document.getElementById("westBtn").disabled = false;
+            }else{
+              document.getElementById("westBtn").disabled = true;
+            }
+            look();
+          }
+         }
+         
+         // Directional Buttons
+         function btnNorth_click() {
+          move('n');
+         }
+
+         function btnSouth_click() {
+          move('s');
+          }
+         
+         function btnEast_click() {
+          move('e');   
+          }
+         
+         function btnWest_click() {
+          move('w');
+          }
 
      // Story / Location Description
      function look() {
@@ -272,10 +213,7 @@
      
      function navigationError() {
          navigationErrorCount = navigationErrorCount + 1;
-         if(currentLoc == 9){
-          displayMessage("You do not have all the items!");
-         }
-         else if (navigationErrorCount < sarcasmThreshold) {
+         if (navigationErrorCount < sarcasmThreshold) {
             displayMessage("You cannot go that way.");
          } else {
             displayMessage("You have been attacked by a wild creature and died! Better luck next time!");
@@ -321,9 +259,6 @@
          }  else if ( (!hasVisitedLoc9) && (currentLoc === 9) ) {            
                score = score + 5;
                hasVisitedLoc9 = true;
-         }  else if ( (!hasVisitedLoc10) && (currentLoc === 10) ) {            
-               score = score + 5;
-               hasVisitedLoc9 = true;
          }                  
       }
       
@@ -338,31 +273,31 @@
       }
 
       function btnGo_click(){
-      	var input = document.getElementById('txtCommand').value;
-      	if(input == 'n' || input == 'N'){
-      		btnNorth_click(); //Run north command if input is N or n
-      	}else if(input == 's' || input == 'S'){
-      		btnSouth_click(); //Run south command if input is S or s
-      	}else if(input == 'w' || input == 'W'){
-      		btnWest_click(); //Run west command if input is W or w
-      	}else if(input == 'e' || input == 'E'){
-      		btnEast_click(); //Run east command if input is E or e
-      	}else if(input.toLowerCase() == "help"){
+        var input = document.getElementById('txtCommand').value;
+        if(input == 'n' || input == 'N'){
+          btnNorth_click(); //Run north command if input is N or n
+        }else if(input == 's' || input == 'S'){
+          btnSouth_click(); //Run south command if input is S or s
+        }else if(input == 'w' || input == 'W'){
+          btnWest_click(); //Run west command if input is W or w
+        }else if(input == 'e' || input == 'E'){
+          btnEast_click(); //Run east command if input is E or e
+        }else if(input.toLowerCase() == "help"){
             help();
         }else if(input.toLowerCase() == 'i'){
             inventory();
         }else if(input.substring(0,4).toLowerCase() == "take"){
             take(input.substring(5,input.length));
         }else{
-      		displayMessage('Invalid command! Try using N, S, E, W, n, s, e, w');
-      	}
+          displayMessage('Invalid command! Try using N, S, E, W, n, s, e, w');
+        }
       }
-	</script>
-	</head>
-	<body style="background-color:#ffcc00" onload="init()">
-		<h1 style="text-align:center;font-size:300%;color:white;">Welcome to Desert Adventure!</h1>
-		<p style="text-align:center;color:white;">Any Problems? Contact me <a href = "mailto:kyle.napolitano3@marist.edu">here.</a></p>
-		<input type="button" 
+  </script>
+  </head>
+  <body style="background-color:#ffcc00" onload="init()">
+    <h1 style="text-align:center;font-size:300%;color:white;">Welcome to Desert Adventure!</h1>
+    <p style="text-align:center;color:white;">Any Problems? Contact me <a href = "mailto:kyle.napolitano3@marist.edu">here.</a></p>
+    <input type="button" 
                value="North"
                onclick="btnNorth_click();"
                id="northBtn">
@@ -400,5 +335,5 @@
         <li>Food</li>
         </ol>
         <img src="gamemap.png" style="width:400;height:400;">
-	</body>
+  </body>
 </html>
